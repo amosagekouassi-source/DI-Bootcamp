@@ -1,46 +1,36 @@
-from datetime import datetime
+#Daily challenge Gold : Solve the Matrix
 
-# 1. Demander la date de naissance
-date_input = input("Please enter your birthdate (DD/MM/YYYY): ")
+import re
 
-# 2. Convertir la saisie en objet "date" pour extraire facilement le jour, mois, année
-birthdate = datetime.strptime(date_input, "%d/%m/%Y").date() if "/" in date_input else datetime.now().date()
+# 1. Définition de la chaîne Matrix d'origine
+matrix_string = """711
+Tsx
+h%?
+i #
+sM 
+$a 
+#t%
+^r!"""
 
-# (On extrait l'année pour le calcul)
-year = birthdate.year
+# 2. Reproduction de la grille sous forme de liste 2D (Lignes et Colonnes)
+# On sépare par ligne, puis chaque ligne est découpée en caractères
+grid = [list(line) for line in matrix_string.split('\n') if line]
 
-# 3. Calculer l'âge actuel (basé sur l'année actuelle 2026)
-current_year = 2026
-age = current_year - year
+num_rows = len(grid)
+num_cols = len(grid[0])
 
-# 4. Trouver le dernier chiffre de l'âge (ex: 53 -> 3)
-# Astuce : Le "Modulo 10" (% 10) donne toujours le reste, donc le dernier chiffre !
-num_candles = age % 10
+# 3. Lecture colonne par colonne (du haut vers le bas)
+decoded_chars = []
+for col in range(num_cols):
+    for row in range(num_rows):
+        decoded_chars.append(grid[row][col])
 
-# 5. Vérifier si l'année est bissextile (Leap Year)
-# Règle : divisible par 4 mais pas par 100, OU divisible par 400
-is_leap_year = (year % 4 == 0 and year % 100 != 0) or (year % 400 == 0)
+# On fusionne tous les caractères pour obtenir la chaîne brute
+raw_message = "".join(decoded_chars)
 
-# 6. Dessiner le gâteau dynamiquement selon le nombre de bougies
-candles = "|" * num_candles
-spaces = " " * ((11 - num_candles) // 2)  # Pour centrer les bougies sur le gâteau
+# 4. Nettoyage du message secret avec des expressions régulières (Regex)
+# Ce motif remplace les symboles situés UNIQUEMENT entre des caractères alphanumériques par un espace
+secret_message = re.sub(r'(?<=\w)[^\w]+(?=\w)', ' ', raw_message)
 
-cake_art = f"""
-{spaces}{candles}
-
-      |     |      
-    ============   
-
-   |  ~  ~  ~  ~ | 
-   |             | 
-  ================="""
-
-# 7. Affichage final (Un ou deux gâteaux !)
-print(f"\nYou are {age} years old. Your cake gets {num_candles} candle(s):")
-
-if is_leap_year:
-    print("\nBonus: You were born on a leap year! Here are TWO cakes!")
-    print(cake_art)
-    print(cake_art)
-else:
-    print(cake_art)
+# Affichage du résultat final
+print(secret_message)
