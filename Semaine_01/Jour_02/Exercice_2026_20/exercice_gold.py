@@ -45,6 +45,3 @@ while True:
     if saisie == mon_nom:
         print("Félicitations, vous avez trouvé mon nom !")
         break 
-
-#Exercise 4: Check the index
-
