@@ -48,3 +48,71 @@ while True:
 
 #Exercise 4: Check the index
 
+# 1. Notre liste de noms (avec des doublons pour l'exemple)
+liste_noms = ["Jean", "Amos", "Marie", "Amos", "Lucas"]
+
+# 2. Demander le nom à l'utilisateur
+nom_recherche = input("Entrez votre nom : ")
+
+# 3. Vérifier si le nom est dans la liste
+if nom_recherche in liste_noms:
+    # .index() trouve automatiquement l'indice de la PREMIÈRE fois où le nom apparaît
+    indice = liste_noms.index(nom_recherche)
+    print(f"Votre nom est dans la liste ! Sa première occurrence (apparition) est à l'indice : {indice}")
+else:
+    print("Votre nom ne figure pas dans la liste.")
+
+#Exercise 5: Greatest Number
+
+liste_nombres = []
+
+# La boucle tourne exactement 3 fois (de 1 à 3)
+for i in range(1, 4):
+    nombre = int(input(f"Entrez le nombre n°{i} : "))
+    liste_nombres.append(nombre)
+
+# Affichage du résultat final
+print(f"Le plus grand nombre est : {max(liste_nombres)}")
+
+
+#Exercise 6: Random number
+
+import random
+
+# Initialisation des compteurs pour le Bonus 2
+victoires = 0
+defaites = 0
+
+print("--- JEU DU NOMBRE MYSTÈRE ---")
+
+# Boucle pour permettre de rejouer (Bonus 1)
+while True:
+    # 1. Demander un nombre à l'utilisateur
+    saisie = input("\nDevinez un nombre entre 1 et 9 (ou tapez 'quit' pour quitter) : ")
+    
+    # Condition de sortie de la boucle
+    if saisie.lower() == 'quit':
+        break
+        
+    # Conversion de la saisie en nombre entier
+    choix_utilisateur = int(saisie)
+    
+    # 2. Générer un nombre aléatoire entre 1 et 9 inclus
+    nombre_mystere = random.randint(1, 9)
+    
+    print(f"Le nombre mystère était : {nombre_mystere}")
+    
+    # 3. Vérification du résultat
+    if choix_utilisateur == nombre_mystere:
+        print("“Winner”")
+        victoires += 1  # Ajoute 1 victoire
+    else:
+        print("“Better luck next time.”")
+        defaites += 1  # Ajoute 1 défaite
+
+# 4. Affichage du bilan à la sortie de la boucle (Bonus 2)
+print("\n--- FIN DE LA PARTIE ---")
+print(f"Total de parties gagnées : {victoires}")
+print(f"Total de parties perdues : {defaites}")
+print("Merci d'avoir joué !")
+
