@@ -1,0 +1,121 @@
+import string
+
+# ==========================================
+# EXERCISE 1 : CARS
+# ==========================================
+
+# 1. Copie de la chaîne de caractères
+cars_string = "Volkswagen, Toyota, Ford Motor, Honda, Chevrolet"
+
+# 2. Conversion automatique en liste (en coupant au niveau des virgules et en enlevant les espaces)
+manufacturers = [car.strip() for car in cars_string.split(",")]
+
+# 3. Nombre de constructeurs
+print(f"There are {len(manufacturers)} manufacturers in the list.")
+
+# 4. Tri de la liste par ordre décroissant (Z-A)
+manufacturers_desc = sorted(manufacturers, reverse=True)
+print(f"Manufacturers in descending order (Z-A): {manufacturers_desc}")
+
+# 5. Comptage des lettres avec list comprehension
+count_with_o = len([name for name in manufacturers if "o" in name.lower()])
+count_without_i = len([name for name in manufacturers if "i" not in name.lower()])
+
+print(f"Manufacturers with the letter 'o': {count_with_o}")
+print(f"Manufacturers without the letter 'i': {count_without_i}")
+
+# --- BONUS 1 : Supprimer les doublons ---
+duplicates_list = ["Honda", "Volkswagen", "Toyota", "Ford Motor", "Honda", "Chevrolet", "Toyota"]
+# Utilisation d'un set pour supprimer automatiquement les doublons
+unique_companies = list(set(duplicates_list))
+
+# Transformation de la liste en chaîne de texte séparée par des virgules
+comma_separated_companies = ", ".join(unique_companies)
+print(f"\nBonus 1 - Companies without duplicates: {comma_separated_companies}")
+print(f"Bonus 1 - There are now {len(unique_companies)} companies in the list.")
+
+# --- BONUS 2 : Ordre A-Z et inversion des lettres ---
+# On trie d'abord par ordre alphabétique (A-Z)
+sorted_companies = sorted(unique_companies)
+# On inverse les lettres de chaque nom avec l'astuce [::-1]
+reversed_names_companies = [name[::-1] for name in sorted_companies]
+print(f"Bonus 2 - Alphabetical order with reversed letters: {reversed_names_companies}")
+
+
+# ==========================================
+# EXERCISE 2 : WHAT'S YOUR NAME?
+# ==========================================
+
+# Définition de la fonction avec middle_name optionnel (valeur par défaut = "")
+def get_full_name(first_name, last_name, middle_name=""):
+    # Si un deuxième prénom est fourni
+    if middle_name:
+        full_name = f"{first_name} {middle_name} {last_name}"
+    else:
+        full_name = f"{first_name} {last_name}"
+    
+    # .title() met automatiquement la première lettre de chaque mot en majuscule
+    return full_name.title()
+
+# Tests de la fonction
+print(get_full_name(first_name="john", middle_name="hooker", last_name="lee"))
+print(get_full_name(first_name="bruce", last_name="lee"))
+
+
+# ==========================================
+# EXERCISE 3 : ENGLISH TO MORSE & OPPOSITE
+# ==========================================
+
+# Table de traduction Morse (Dictionnaire)
+MORSE_CODE_DICT = {
+    'A': '.-', 'B': '-...', 'C': '-..-', 'D': '-..', 'E': '.', 'F': '..-.', 
+    'G': '--.', 'H': '....', 'I': '..', 'J': '.---', 'K': '-.-', 'L': '.-..', 
+    'M': '--', 'N': '-.', 'O': '---', 'P': '.--.', 'Q': '--.-', 'R': '.-.', 
+    'S': '...', 'T': '-', 'U': '..-', 'V': '...-', 'W': '.--', 'X': '-..-', 
+    'Y': '-.--', 'Z': '--..', '1': '.----', '2': '..---', '3': '...--', 
+    '4': '....-', '5': '.....', '6': '-....', '7': '--...', '8': '---..', 
+    '9': '----.', '0': '-----'
+}
+
+# Inversion du dictionnaire pour la traduction inverse (Morse vers Anglais)
+ENGLISH_CODE_DICT = {value: key for key, value in MORSE_CODE_DICT.items()}
+
+def english_to_morse(text):
+    words = text.upper().split(" ")
+    morse_words = []
+    
+    for word in words:
+        morse_letters = []
+        for letter in word:
+            if letter in MORSE_CODE_DICT:
+                morse_letters.append(MORSE_CODE_DICT[letter])
+        # Joint les lettres par un espace
+        morse_words.append(" ".join(morse_letters))
+        
+    # Joint les mots par un slash "/"
+    return " / ".join(morse_words)
+
+def morse_to_english(morse_text):
+    # On sépare d'abord les mots par le slash
+    morse_words = morse_text.split(" / ")
+    english_words = []
+    
+    for word in morse_words:
+        # On sépare ensuite les lettres de chaque mot par l'espace
+        letters = word.split(" ")
+        english_letters = []
+        for letter in letters:
+            if letter in ENGLISH_CODE_DICT:
+                english_letters.append(ENGLISH_CODE_DICT[letter])
+        english_words.append("".join(english_letters))
+        
+    return " ".join(english_words)
+
+# Tests du traducteur Morse
+message_original = "HELLO WORLD"
+message_en_morse = english_to_morse(message_original)
+message_traduit_inverse = morse_to_english(message_en_morse)
+
+print(f"Original Text: {message_original}")
+print(f"In Morse Code: {message_en_morse}")
+print(f"Back to English: {message_traduit_inverse}")
