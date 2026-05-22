@@ -1,7 +1,6 @@
 # ==========================================
 # EXERCICE 1 : LES CHATS
 # ==========================================
-print("--- EXERCICE 1 : LES CHATS ---")
 
 class Cat:
     def __init__(self, cat_name, cat_age):
@@ -33,8 +32,6 @@ print(f"Le chat le plus âgé est {oldest_cat.name}, et a {oldest_cat.age} ans."
 # ==========================================
 # EXERCICE 2 : CHIENS
 # ==========================================
-print("\n--- EXERCICE 2 : CHIENS ---")
-
 # Étape 1 : Créer la classe Chien
 class Dog:
     def __init__(self, name, height):
@@ -73,7 +70,6 @@ else:
 # ==========================================
 # EXERCICE 3 : QUI EST LE PRODUCTEUR DE LA CHANSON ?
 # ==========================================
-print("\n--- EXERCICE 3 : CHANSONS ---")
 
 class Song:
     def __init__(self, lyrics):
@@ -96,7 +92,6 @@ stairway.sing_me_a_song()
 # ==========================================
 # EXERCICE 4 : APRÈS-MIDI AU ZOO
 # ==========================================
-print("\n--- EXERCICE 4 : AU ZOO ---")
 
 class Zoo:
     def __init__(self, zoo_name):
