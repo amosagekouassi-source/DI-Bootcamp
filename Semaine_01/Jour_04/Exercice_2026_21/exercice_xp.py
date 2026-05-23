@@ -68,7 +68,7 @@ class Dog:
 
     def run_speed(self):
 
-        return self.weight / self.age
+        return self.weight / self.age*10
 
     def fight(self, other_dog):
         
